@@ -93,9 +93,9 @@ public class MainActivity extends Activity implements RecognizerDialogListener,
 
 		Task task = new Task(Task.SendMessage, callTarget);
 		//Task task = new Task(Task.SetAlarm, "大闹天宫闹钟");
-		Test(task);
+		//Test(task);
 		
-		//voiceString = "大闹天宫闹钟";
+		//voiceString = "打电话给沛江";
 
 
 	}
