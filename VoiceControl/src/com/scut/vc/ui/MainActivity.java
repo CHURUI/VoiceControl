@@ -105,7 +105,7 @@ public class MainActivity extends Activity implements RecognizerDialogListener,
 		//Test(task);
 
 		
-		//voiceString = "打电话给沛江";
+		voiceString = "打开闪光灯";
 
 
 
