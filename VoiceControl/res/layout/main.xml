@@ -11,19 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:gravity="center|top"
-            android:text="语音小小助手"
-            android:textSize="30dip"
-            android:textColor="#165be8"
-            android:textStyle="bold" >
-        </TextView>
     </RelativeLayout>
 
     <ListView
@@ -42,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:background="@android:color/transparent"
-        android:src="@drawable/helper_voice" >
+        android:src="@drawable/voice_helper_sl" >
     </ImageButton>
 
 </LinearLayout><!--
