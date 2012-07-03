@@ -103,7 +103,7 @@ public class MainActivity extends Activity implements RecognizerDialogListener,
 		//Test(task);
 
 		//mDevCon.Release();
-		voiceString = "打开浏览器";
+		voiceString = "手电筒";
 
 
 

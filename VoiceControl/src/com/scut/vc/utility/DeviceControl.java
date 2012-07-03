@@ -69,7 +69,7 @@ public class DeviceControl {
 		/**
 		 * 手电筒初始化
 		 */
-		// mCamera = Camera.open(Camera.getNumberOfCameras() - 1);
+		 //mCamera = Camera.open(Camera.getNumberOfCameras() - 1);
 		mCamera = Camera.open();
 		parameter = mCamera.getParameters();
 
@@ -153,11 +153,20 @@ public class DeviceControl {
 	 */
 	private void EnableTorch(boolean enable) {
 		if (enable) {
-			parameter.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+			parameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
 			mCamera.setParameters(parameter);
+			
+			mCamera.autoFocus( new Camera.AutoFocusCallback (){    
+			    public void onAutoFocus(boolean success, Camera camera) {    
+			            }                   
+			        });   
+			mCamera.startPreview();   
 		} else {
+			mCamera.stopPreview();  
 			parameter.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 			mCamera.setParameters(parameter);
+			
+			
 		}
 	}
 
@@ -277,14 +286,14 @@ public class DeviceControl {
 				return;
 			}
 			if (!(parameter.getFlashMode().equals(
-					Camera.Parameters.FLASH_MODE_ON)
+					Camera.Parameters.FLASH_MODE_TORCH)
 					
 					^ device.flag)) {
 
 				return;
 			}
 			if (parameter.getFlashMode().equals(
-					Camera.Parameters.FLASH_MODE_ON)) {
+					Camera.Parameters.FLASH_MODE_TORCH)) {
 				EnableTorch(false);
 				
 			} else {
