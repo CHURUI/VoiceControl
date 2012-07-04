@@ -13,6 +13,7 @@
 
 package com.scut.vc.utility;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -44,7 +45,7 @@ public class DeviceControl {
 	 */
 	private Activity mActivity;
 
-	private Camera mCamera;// 手机筒
+	private Camera mCamera = null;// 手机筒
 	private Camera.Parameters parameter; // 手电筒参数
 	private WifiManager mWifiManager;// wifi管理器
 	private BluetoothAdapter mBlueTooth;// 蓝牙管理器
@@ -65,14 +66,34 @@ public class DeviceControl {
 		initial();// 初始化
 	}
 
-	private void initial() {
-		/**
-		 * 手电筒初始化
-		 */
-		 //mCamera = Camera.open(Camera.getNumberOfCameras() - 1);
-		mCamera = Camera.open();
-		parameter = mCamera.getParameters();
 
+	/**
+	 * 手电筒初始化
+	 * 电筒不在这里初始化了
+	 */
+	public void initialTorch() {
+		
+		// mCamera = Camera.open(Camera.getNumberOfCameras() - 1);
+		if (mCamera == null) {
+			mCamera = Camera.open();
+			parameter = mCamera.getParameters();
+		} else {
+			try {
+				mCamera.reconnect();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	private void initial() {
+		
+
+
+		initialTorch();
+		
 		/**
 		 * GPS
 		 */
@@ -153,7 +174,9 @@ public class DeviceControl {
 	 */
 	private void EnableTorch(boolean enable) {
 		if (enable) {
+
 			parameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+
 			mCamera.setParameters(parameter);
 			
 			mCamera.autoFocus( new Camera.AutoFocusCallback (){    
@@ -165,8 +188,7 @@ public class DeviceControl {
 			mCamera.stopPreview();  
 			parameter.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 			mCamera.setParameters(parameter);
-			
-			
+
 		}
 	}
 
@@ -262,6 +284,7 @@ public class DeviceControl {
 
 	public void Release() {
 		mCamera.release();
+		mCamera = null;
 	}
 
 	public void Execute(Device device) {
